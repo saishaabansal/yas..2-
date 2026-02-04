@@ -15,7 +15,7 @@
 
     :root {
       --baby-pink: #f8c8dc;
-      --baby-pink-dark: #e7a9c2;
+      --baby-pink-dark: #de9bb8; /* darker than before */
       --cherry-red: #b11226;
       --white: #ffffff;
     }
@@ -52,7 +52,7 @@
       to { transform: translateY(-10vh); }
     }
 
-    /* COMMON BUTTON STYLE */
+    /* BUTTONS */
     .btn {
       background: var(--cherry-red);
       color: var(--white);
@@ -80,8 +80,11 @@
       display: none;
     }
 
-    /* ENVELOPE */
+    /* ENVELOPE PAGE */
     .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
       z-index: 2;
     }
@@ -101,7 +104,7 @@
       position: relative;
       cursor: pointer;
       box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .envelope::before {
@@ -149,9 +152,7 @@
       transform: translateY(0);
     }
 
-    /* SECOND BUTTON */
     .next-btn {
-      margin-top: 10px;
       font-size: 32px;
       padding: 16px 50px;
     }
@@ -204,7 +205,6 @@
     <div class="envelope" id="envelope">
       <div class="flap"></div>
       <div class="letter">
-        <!-- ✨ PUT YOUR LETTER TEXT HERE LATER ✨ -->
         This is where your message will go.
       </div>
     </div>
