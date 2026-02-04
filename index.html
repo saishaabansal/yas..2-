@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine Gift</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    /* FORCE BABY PINK BACKGROUND */
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f8c8dc;
+      font-family: 'Pacifico', cursive;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* FLOATING HEARTS */
+    .heart {
+      position: absolute;
+      color: #b11226;
+      opacity: 0.06;
+      animation: floatUp 12s linear infinite;
+      filter: blur(1px);
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(110vh) scale(1);
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.4);
+      }
+    }
+
+    /* BUTTON */
+    .start-btn {
+      background-color: #b11226;
+      color: white;
+      font-size: 60px;
+      padding: 22px 70px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Pacifico', cursive;
+      animation: pulse 3s ease-in-out infinite;
+      transition: transform 0.3s ease;
+      z-index: 2;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.08);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.85; }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ENVELOPE CONTAINER */
+    .envelope-container {
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hint {
+      font-size: 28px;
+      color: #b11226;
+      margin-bottom: 18px;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    /* ENVELOPE */
+    .envelope {
+      width: 420px;
+      height: 280px;
+      background-color: white;
+      position: relative;
+      border-radius: 18px;
+      cursor: pointer;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    /* TRIANGLE LINES */
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(177,18,38,0.25);
+      clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+      border-radius: 18px;
+    }
+
+    /* FLAP */
+    .flap {
+      position: absolute;
+      inset: 0;
+      background-color: white;
+      clip-path: polygon(0 0, 100% 0, 50% 55%);
+      transform-origin: top;
+      transition: transform 1s ease;
+      border-radius: 18px;
+    }
+
+    /* LETTER */
+    .letter {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      width: 390px;
+      height: 230px;
+      background-color: #fffafc;
+      border-radius: 16px;
+      padding: 25px;
+      box-sizing: border-box;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      border: none;
+      resize: none;
+      background: transparent;
+      outline: none;
+      font-family: 'Pacifico', cursive;
+      font-size: 26px;
+      color: #b11226;
+    }
+
+    .open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .open .letter {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEARTS -->
+  <script>
+    for (let i = 0; i < 14; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "♥";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 14 + Math.random() * 18 + "px";
+      heart.style.animationDuration = 10 + Math.random() * 10 + "s";
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- START BUTTON -->
+  <button class="start-btn" id="startBtn">Numero 4?</button>
+
+  <!-- ENVELOPE -->
+  <div class="envelope-container hidden" id="envelopeContainer">
+    <div class="hint">click to open</div>
+    <div class="envelope" id="envelope">
+      <div class="flap"></div>
+      <div class="letter">
+        <textarea placeholder="Write your message here…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const startBtn = document.getElementById("startBtn");
+    const envelopeContainer = document.getElementById("envelopeContainer");
+    const envelope = document.getElementById("envelope");
+
+    startBtn.addEventListener("click", () => {
+      startBtn.classList.add("hidden");
+      envelopeContainer.classList.remove("hidden");
+    });
+
+    envelope.addEventListener("click", () => {
+      envelope.classList.toggle("open");
+    });
+  </script>
+
+</body>
+</html>
+
+
