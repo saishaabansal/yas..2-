@@ -15,7 +15,7 @@
 
     :root {
       --baby-pink: #f8c8dc;
-      --baby-pink-dark: #e7a9c2;
+      --baby-pink-dark: #de9bb8;
       --cherry-red: #b11226;
       --white: #ffffff;
     }
@@ -36,12 +36,12 @@
       position: relative;
     }
 
-    /* HEARTS */
+    /* FLOATING HEARTS */
     .heart {
       position: absolute;
       color: var(--cherry-red);
-      opacity: 0.07;
-      font-size: 30px;
+      opacity: 0.08;
+      font-size: 34px;
       animation: float 15s linear infinite;
       pointer-events: none;
       text-shadow: 0 0 10px rgba(177,18,38,0.3);
@@ -52,7 +52,7 @@
       to { transform: translateY(-10vh); }
     }
 
-    /* COMMON BUTTON STYLE */
+    /* BUTTONS */
     .btn {
       background: var(--cherry-red);
       color: var(--white);
@@ -64,6 +64,7 @@
       font-family: 'Pacifico', cursive;
       animation: pulse 3s ease-in-out infinite;
       transition: transform 0.3s ease;
+      z-index: 2;
     }
 
     .btn:hover {
@@ -80,10 +81,13 @@
       display: none;
     }
 
-    /* ENVELOPE */
+    /* ENVELOPE PAGE */
     .container {
       text-align: center;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .hint {
@@ -101,9 +105,10 @@
       position: relative;
       cursor: pointer;
       box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
+    /* CLEAN ENVELOPE LINES */
     .envelope::before {
       content: "";
       position: absolute;
@@ -149,9 +154,7 @@
       transform: translateY(0);
     }
 
-    /* SECOND BUTTON */
     .next-btn {
-      margin-top: 10px;
       font-size: 32px;
       padding: 16px 50px;
     }
@@ -203,10 +206,7 @@
 
     <div class="envelope" id="envelope">
       <div class="flap"></div>
-      <div class="letter">
-        <!-- ✨ PUT YOUR LETTER TEXT HERE LATER ✨ -->
-        This is where your message will go.
-      </div>
+      <div class="letter">lol</div>
     </div>
 
     <button class="btn next-btn" id="nextBtn">
@@ -215,9 +215,7 @@
   </div>
 
   <!-- THIRD PAGE -->
-  <div class="third-page" id="thirdPage">
-    Hi
-  </div>
+  <div class="third-page" id="thirdPage">Hi</div>
 
   <script>
     const startBtn = document.getElementById("startBtn");
