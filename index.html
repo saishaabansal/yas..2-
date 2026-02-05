@@ -4,13 +4,20 @@
   <meta charset="UTF-8">
   <title>Valentine</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Sweetheart&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     :root {
       --baby-pink: #f8c8dc;
-      --baby-pink-dark: #e7a9c2;
+      --third-pink: #fbc2d0;
+      --third-orange: #fcbfa3;
       --cherry-red: #b11226;
       --white: #ffffff;
     }
@@ -21,12 +28,17 @@
       background: var(--baby-pink);
       font-family: 'Pacifico', cursive;
       overflow: hidden;
-      transition: background 1.2s ease;
+      transition: background 1.5s ease;
     }
 
-    body { display: flex; justify-content: center; align-items: center; position: relative; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
 
-    /* HEARTS */
+    /* FLOATING HEARTS */
     .heart {
       position: absolute;
       color: var(--cherry-red);
@@ -35,8 +47,13 @@
       animation: float 15s linear infinite;
       pointer-events: none;
       text-shadow: 0 0 10px rgba(177,18,38,0.3);
+      z-index: 1;
     }
-    @keyframes float { from { transform: translateY(110vh); } to { transform: translateY(-10vh); } }
+
+    @keyframes float {
+      from { transform: translateY(110vh); }
+      to { transform: translateY(-10vh); }
+    }
 
     /* BUTTONS */
     .btn {
@@ -51,78 +68,152 @@
       animation: pulse 3s ease-in-out infinite;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .btn:hover { transform: scale(1.07); box-shadow: 0 0 15px rgba(177,18,38,0.4); }
-    @keyframes pulse { 0% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); opacity: 0.85; } }
-    .hidden { display: none; }
+
+    .btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 15px rgba(177,18,38,0.4);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.85; }
+    }
+
+    .hidden {
+      display: none;
+    }
 
     /* ENVELOPE */
-    .container { text-align: center; z-index: 2; }
-    .hint { font-size: 28px; color: var(--cherry-red); margin-bottom: 18px; animation: pulse 3s ease-in-out infinite; }
+    .container {
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hint {
+      font-size: 28px;
+      color: var(--cherry-red);
+      margin-bottom: 18px;
+      animation: pulse 3s ease-in-out infinite;
+    }
 
     .envelope {
-      width: 460px; height: 300px; background: var(--white);
-      border-radius: 20px; position: relative; cursor: pointer;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12); margin-bottom: 35px;
-      transition: transform 0.3s ease;
+      width: 520px;
+      height: 350px;
+      background: linear-gradient(to bottom, #fff, #f7f2f5);
+      border-radius: 20px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      margin-bottom: 35px;
     }
-    .envelope:hover { transform: scale(1.02); }
+
     .envelope::before {
       content: "";
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       border: 2px solid rgba(177,18,38,0.25);
       clip-path: polygon(0 100%, 50% 45%, 100% 100%);
       border-radius: 20px;
     }
+
     .flap {
-      position: absolute; inset: 0; background: var(--white);
+      position: absolute;
+      inset: 0;
+      background: var(--white);
       clip-path: polygon(0 0, 100% 0, 50% 55%);
       transform-origin: top;
       transition: transform 0.8s ease;
       border-radius: 20px;
     }
-    .letter {
-      position: absolute; bottom: 15px; left: 15px;
-      width: 430px; height: 240px; background: #fffafb;
-      border-radius: 15px; padding: 25px;
-      opacity: 0; transform: translateY(30px);
-      transition: all 0.8s ease; color: var(--cherry-red);
-      font-size: 26px; line-height: 1.4;
-    }
-    .open .flap { transform: rotateX(180deg) scaleY(1.05); } 
-    .open .letter { opacity: 1; transform: translateY(0); }
 
-    /* BUTTONS BELOW ENVELOPE */
-    .next-btn, .prev-btn { margin-top: 10px; font-size: 32px; padding: 16px 50px; }
-    .prev-btn { margin-right: 20px; }
+    /* LETTER (SCROLLABLE PINK PAPER) */
+    .letter {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      width: 490px;
+      height: 290px;
+      background: #ffe6ed;
+      border-radius: 12px;
+      padding: 22px;
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      transition: all 0.8s ease;
+      color: var(--cherry-red);
+      font-family: 'Sweetheart', cursive;
+      font-size: 20px;
+      line-height: 1.6;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+      overflow-y: auto;
+      text-align: left;
+      white-space: pre-line;
+    }
+
+    /* soft scrollbar */
+    .letter::-webkit-scrollbar {
+      width: 6px;
+    }
+    .letter::-webkit-scrollbar-thumb {
+      background: rgba(177,18,38,0.25);
+      border-radius: 10px;
+    }
+
+    .open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .open .letter {
+      opacity: 1;
+      transform: translateY(-10px) scale(1);
+    }
+
+    /* ARROW BUTTONS */
+    .nav-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .arrow-btn {
+      font-size: 40px;
+      padding: 12px 40px;
+    }
 
     /* THIRD PAGE */
     .third-page {
-      position: absolute; inset: 0; display: flex; justify-content: center;
-      align-items: center; font-size: 60px; color: var(--cherry-red);
-      opacity: 0; pointer-events: none; transition: opacity 1.2s ease;
-      flex-direction: column; text-align: center;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      font-size: 60px;
+      color: var(--cherry-red);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.5s ease;
+      background: linear-gradient(to bottom, var(--third-pink), var(--third-orange));
+      line-height: 1.4;
     }
-    .show-third { background: var(--baby-pink-dark); }
-    .show-third .third-page { opacity: 1; }
 
-    /* TYPEWRITER */
-    #typeText { text-align: center; line-height: 1.3; }
+    .show-third .third-page {
+      opacity: 1;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- CLICK SOUND -->
-  <audio id="clickSound" src="sounds/click.mp3" preload="auto"></audio>
-
-  <!-- HEARTS -->
+  <!-- FLOATING HEARTS -->
   <script>
     for (let i = 0; i < 16; i++) {
       const h = document.createElement("div");
       h.className = "heart";
       h.innerHTML = "♥";
       h.style.left = Math.random() * 100 + "vw";
-      h.style.animationDuration = 12 + Math.random() * 10 + "s";
+      h.style.animationDuration = 12 + Math.random() * 8 + "s";
       document.body.appendChild(h);
     }
   </script>
@@ -136,19 +227,43 @@
 
     <div class="envelope" id="envelope">
       <div class="flap"></div>
-      <div class="letter">hey baby</div>
+      <div class="letter">
+okayyy so hiiiii my loveeee😭😭
+
+i dont think you were expecting me to code something for you and ur on a website (pretty basic and layerless) BUT A WEBSITE dedicated to you😭
+
+everything aside tho it does not feel realll to already be on apna fourth flippin monthh. like time flew by so fast and we made so much progress and i wanna continue making sm memories w youuu. i still remember the field trip omg there were sm firsts for us-
+
+ur my pretty baby and i love you the most no matter whatt. you are and always will be my one and only 11:11 wish, and i genuinely consider you my safe space. yk wnv i listen to a pretty love song ur the first thing that comes to mind😭💗
+
+i wanna be w u foreverrrr and i want us to be happy and in love for the rest of our livesss cuz i defoo see u in my futuree
+
+i love every single thing about youuuu💗 like even when im sad js like yk thinking abt u and ur smile makes me feel a whole lot betterr
+
+im always here for you and i will be there by ur side whether ur having a good or a bad day and i will support you through wtv decision u decide to make no judgement
+
+oh and even tho we always say this, UR ALL MINE AND IM NOT SHARING. i will also continue to abuse you for the rest of ur life and u cant do shit abt it cuz u love me too much🥰
+
+feel unsafe the world is very dangerous😭🙏     </div>
     </div>
 
-    <div>
-      <button class="btn prev-btn" id="prevBtn">←</button>
-      <button class="btn next-btn" id="nextBtn">→</button>
+    <div class="nav-buttons">
+      <button class="btn arrow-btn" id="prevBtn">←</button>
+      <button class="btn arrow-btn" id="nextBtn">→</button>
     </div>
   </div>
 
   <!-- THIRD PAGE -->
   <div class="third-page" id="thirdPage">
-    <div id="typeText"></div>
+    <div>
+      ill always love you more btw<br>
+      happy 4 month + valentines baby
+    </div>
   </div>
+
+  <!-- AUDIO FILES -->
+  <audio id="clickSound" src="click.mp3"></audio>
+  <audio id="rustleSound" src="rustle.wav"></audio>
 
   <script>
     const startBtn = document.getElementById("startBtn");
@@ -158,58 +273,27 @@
     const prevBtn = document.getElementById("prevBtn");
     const body = document.body;
     const clickSound = document.getElementById("clickSound");
-    const typeText = document.getElementById("typeText");
+    const rustleSound = document.getElementById("rustleSound");
 
-    const thirdText = [
-      "ill always love you more btw",
-      "happy 4 month + valentines baby"
-    ];
-
-    function playClick() { clickSound.cloneNode().play(); }
-
-    // START BUTTON
     startBtn.onclick = () => {
-      playClick();
+      clickSound.play();
       startBtn.classList.add("hidden");
       envelopePage.classList.remove("hidden");
     };
 
-    // ENVELOPE CLICK
     envelope.onclick = () => {
-      playClick();
       envelope.classList.toggle("open");
+      rustleSound.play();
     };
 
-    // NEXT BUTTON
     nextBtn.onclick = () => {
-      playClick();
+      clickSound.play();
       envelopePage.classList.add("hidden");
       body.classList.add("show-third");
-
-      // TYPEWRITER EFFECT
-      let i = 0, line = 0;
-      typeText.innerHTML = "";
-
-      function typeWriter() {
-        if(line < thirdText.length){
-          if(i < thirdText[line].length){
-            typeText.innerHTML += thirdText[line].charAt(i);
-            i++;
-            setTimeout(typeWriter, 80);
-          } else {
-            typeText.innerHTML += "<br>";
-            line++;
-            i = 0;
-            setTimeout(typeWriter, 500);
-          }
-        }
-      }
-      typeWriter();
     };
 
-    // PREVIOUS BUTTON
     prevBtn.onclick = () => {
-      playClick();
+      clickSound.play();
       envelopePage.classList.add("hidden");
       startBtn.classList.remove("hidden");
     };
