@@ -7,15 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --baby-pink: #f8c8dc;
-      --baby-pink-dark: #de9bb8; /* darker than before */
+      --baby-pink-dark: #e7a9c2;
       --cherry-red: #b11226;
       --white: #ffffff;
     }
@@ -29,12 +24,7 @@
       transition: background 1.2s ease;
     }
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
+    body { display: flex; justify-content: center; align-items: center; position: relative; }
 
     /* HEARTS */
     .heart {
@@ -46,11 +36,7 @@
       pointer-events: none;
       text-shadow: 0 0 10px rgba(177,18,38,0.3);
     }
-
-    @keyframes float {
-      from { transform: translateY(110vh); }
-      to { transform: translateY(-10vh); }
-    }
+    @keyframes float { from { transform: translateY(110vh); } to { transform: translateY(-10vh); } }
 
     /* BUTTONS */
     .btn {
@@ -63,125 +49,76 @@
       cursor: pointer;
       font-family: 'Pacifico', cursive;
       animation: pulse 3s ease-in-out infinite;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    .btn:hover { transform: scale(1.07); box-shadow: 0 0 15px rgba(177,18,38,0.4); }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); opacity: 0.85; } }
+    .hidden { display: none; }
 
-    .btn:hover {
-      transform: scale(1.07);
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.85; }
-      50% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.85; }
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    /* ENVELOPE PAGE */
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      z-index: 2;
-    }
-
-    .hint {
-      font-size: 28px;
-      color: var(--cherry-red);
-      margin-bottom: 18px;
-      animation: pulse 3s ease-in-out infinite;
-    }
+    /* ENVELOPE */
+    .container { text-align: center; z-index: 2; }
+    .hint { font-size: 28px; color: var(--cherry-red); margin-bottom: 18px; animation: pulse 3s ease-in-out infinite; }
 
     .envelope {
-      width: 460px;
-      height: 300px;
-      background: var(--white);
-      border-radius: 20px;
-      position: relative;
-      cursor: pointer;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-      margin-bottom: 30px;
+      width: 460px; height: 300px; background: var(--white);
+      border-radius: 20px; position: relative; cursor: pointer;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12); margin-bottom: 35px;
+      transition: transform 0.3s ease;
     }
-
+    .envelope:hover { transform: scale(1.02); }
     .envelope::before {
       content: "";
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       border: 2px solid rgba(177,18,38,0.25);
       clip-path: polygon(0 100%, 50% 45%, 100% 100%);
       border-radius: 20px;
     }
-
     .flap {
-      position: absolute;
-      inset: 0;
-      background: var(--white);
+      position: absolute; inset: 0; background: var(--white);
       clip-path: polygon(0 0, 100% 0, 50% 55%);
       transform-origin: top;
-      transition: transform 1s ease;
+      transition: transform 0.8s ease;
       border-radius: 20px;
     }
-
     .letter {
-      position: absolute;
-      bottom: 15px;
-      left: 15px;
-      width: 430px;
-      height: 240px;
-      background: #fffafb;
-      border-radius: 15px;
-      padding: 25px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-      color: var(--cherry-red);
-      font-size: 26px;
-      line-height: 1.4;
+      position: absolute; bottom: 15px; left: 15px;
+      width: 430px; height: 240px; background: #fffafb;
+      border-radius: 15px; padding: 25px;
+      opacity: 0; transform: translateY(30px);
+      transition: all 0.8s ease; color: var(--cherry-red);
+      font-size: 26px; line-height: 1.4;
     }
+    .open .flap { transform: rotateX(180deg) scaleY(1.05); } 
+    .open .letter { opacity: 1; transform: translateY(0); }
 
-    .open .flap {
-      transform: rotateX(180deg);
-    }
-
-    .open .letter {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .next-btn {
-      font-size: 32px;
-      padding: 16px 50px;
-    }
+    /* BUTTONS BELOW ENVELOPE */
+    .next-btn, .prev-btn { margin-top: 10px; font-size: 32px; padding: 16px 50px; }
+    .prev-btn { margin-right: 20px; }
 
     /* THIRD PAGE */
     .third-page {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 60px;
-      color: var(--cherry-red);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1.2s ease;
+      position: absolute; inset: 0; display: flex; justify-content: center;
+      align-items: center; font-size: 60px; color: var(--cherry-red);
+      opacity: 0; pointer-events: none; transition: opacity 1.2s ease;
+      flex-direction: column; text-align: center;
     }
+    .show-third { background: var(--baby-pink-dark); }
+    .show-third .third-page { opacity: 1; }
 
-    .show-third {
-      background: var(--baby-pink-dark);
+    /* TYPEWRITER & BACK BUTTON */
+    #typeContainer { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+    .back-third-btn {
+      margin-top: 30px; font-size: 32px; padding: 16px 50px;
+      opacity: 0; visibility: hidden; transition: opacity 0.8s ease;
     }
-
-    .show-third .third-page {
-      opacity: 1;
-    }
+    .back-third-btn.show { opacity: 1; visibility: visible; }
   </style>
 </head>
 
 <body>
+
+  <!-- CLICK SOUND -->
+  <audio id="clickSound" src="sounds/click.mp3" preload="auto"></audio>
 
   <!-- HEARTS -->
   <script>
@@ -204,19 +141,21 @@
 
     <div class="envelope" id="envelope">
       <div class="flap"></div>
-      <div class="letter">
-        This is where your message will go.
-      </div>
+      <div class="letter">hey baby</div>
     </div>
 
-    <button class="btn next-btn" id="nextBtn">
-      Click once you've read the note →
-    </button>
+    <div>
+      <button class="btn prev-btn" id="prevBtn">←</button>
+      <button class="btn next-btn" id="nextBtn">→</button>
+    </div>
   </div>
 
   <!-- THIRD PAGE -->
   <div class="third-page" id="thirdPage">
-    Hi
+    <div id="typeContainer">
+      <div id="typeText"></div>
+      <button class="btn back-third-btn" id="backThirdBtn">←</button>
+    </div>
   </div>
 
   <script>
@@ -224,20 +163,75 @@
     const envelopePage = document.getElementById("envelopePage");
     const envelope = document.getElementById("envelope");
     const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
     const body = document.body;
+    const clickSound = document.getElementById("clickSound");
+    const typeText = document.getElementById("typeText");
+    const backThirdBtn = document.getElementById("backThirdBtn");
 
+    const thirdText = [
+      "ill always love you more btw",
+      "happy 4 month + valentines baby"
+    ];
+
+    function playClick() { clickSound.cloneNode().play(); }
+
+    // START BUTTON
     startBtn.onclick = () => {
+      playClick();
       startBtn.classList.add("hidden");
       envelopePage.classList.remove("hidden");
     };
 
+    // ENVELOPE CLICK
     envelope.onclick = () => {
+      playClick();
       envelope.classList.toggle("open");
     };
 
+    // NEXT BUTTON
     nextBtn.onclick = () => {
-      body.classList.add("show-third");
+      playClick();
       envelopePage.classList.add("hidden");
+      body.classList.add("show-third");
+
+      // TYPEWRITER EFFECT
+      let i = 0, line = 0;
+      typeText.innerHTML = "";
+      backThirdBtn.classList.remove("show");
+
+      function typeWriter() {
+        if(line < thirdText.length){
+          if(i < thirdText[line].length){
+            typeText.innerHTML += thirdText[line].charAt(i);
+            i++;
+            setTimeout(typeWriter, 80);
+          } else {
+            typeText.innerHTML += "<br>";
+            line++;
+            i = 0;
+            setTimeout(typeWriter, 500);
+          }
+        } else {
+          backThirdBtn.classList.add("show"); // fade in smoothly
+        }
+      }
+      typeWriter();
+    };
+
+    // PREVIOUS BUTTON
+    prevBtn.onclick = () => {
+      playClick();
+      envelopePage.classList.add("hidden");
+      startBtn.classList.remove("hidden");
+    };
+
+    // BACK FROM THIRD PAGE
+    backThirdBtn.onclick = () => {
+      playClick();
+      body.classList.remove("show-third");
+      envelopePage.classList.remove("hidden");
+      backThirdBtn.classList.remove("show");
     };
   </script>
 
