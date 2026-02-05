@@ -141,7 +141,7 @@
       transform: translateY(30px) scale(0.95);
       transition: all 0.8s ease;
       color: var(--cherry-red);
-      font-family: 'Comic Sans MS', cursive; /* Changed font here */
+      font-family: 'Comic Sans MS', cursive;
       font-size: 18px;
       line-height: 1.6;
       box-shadow: 0 8px 15px rgba(0,0,0,0.12);
@@ -150,7 +150,6 @@
       white-space: pre-line;
     }
 
-    /* soft scrollbar */
     .letter::-webkit-scrollbar {
       width: 6px;
     }
@@ -196,10 +195,21 @@
       transition: opacity 1.5s ease;
       background: linear-gradient(to bottom, var(--third-pink), var(--third-orange));
       line-height: 1.4;
+      padding: 40px;
     }
 
     .show-third .third-page {
       opacity: 1;
+    }
+
+    /* TYPEWRITER */
+    .typewriter-text {
+      font-size: 60px;
+      line-height: 1.2;
+      overflow-wrap: break-word;
+      max-width: 90vw;
+      text-align: center;
+      white-space: pre-line;
     }
   </style>
 </head>
@@ -228,19 +238,9 @@
     <div class="envelope" id="envelope">
       <div class="flap"></div>
       <div class="letter">
-HIII BABYYYY
+        HIII BABYYYY
 
-2 months??? alreadyyyy?? i cannot believe how fast time has flown by and we went from hesitating to send a rs reel to now constantly fighting over who loves the other one more (spoiler alert: its definitely me).
-
-NO BUT SRSLY, i love you sooo muchhh and im sosososo lucky to have u w meeee. I swear the stuff we found cringe suddenly seems so cute to do tgtherr. i am EXTREMELY lucky to have u in my life and be so sure i aint letting u go.
-
-ur my pretty boy and my safe space and i have genuinely never opened up to anyone or trusted anyone this fast. i mean, the way we have so many inside jokes and how half of the shi we say only we would understand is so cutee.
-
-ur sooo fkn fineee like damn. i loveeeee the time we spend tgther at skl (rapidly increasing btw). ur one of the nicest people i know and definitely the best person i met this year, and i am grateful af that we ending 2025 tgther.
-
-urr alll mineee and i aint flippin sharingg. no matter what you think about yourself, to me ur absolutely perfect. i want us to be happy af tgther FOREVERRRR.
-
-HAPPY TWO MONTHSS
+        2 months??? alreadyyyy?? i cannot believe how fast time has flown by...
       </div>
     </div>
 
@@ -252,13 +252,10 @@ HAPPY TWO MONTHSS
 
   <!-- THIRD PAGE -->
   <div class="third-page" id="thirdPage">
-    <div>
-      ill always love you more btw<br>
-      happy 4 month + valentines baby
-    </div>
+    <div class="typewriter-text" id="typewriter"></div>
   </div>
 
-  <!-- AUDIO FILES -->
+  <!-- AUDIO -->
   <audio id="clickSound" src="click.mp3"></audio>
   <audio id="rustleSound" src="rustle.wav"></audio>
 
@@ -271,6 +268,9 @@ HAPPY TWO MONTHSS
     const body = document.body;
     const clickSound = document.getElementById("clickSound");
     const rustleSound = document.getElementById("rustleSound");
+
+    const typewriterElement = document.getElementById("typewriter");
+    const typeText = "ill always love you more btw\nhappy 4 month + valentines baby";
 
     startBtn.onclick = () => {
       clickSound.play();
@@ -287,6 +287,15 @@ HAPPY TWO MONTHSS
       clickSound.play();
       envelopePage.classList.add("hidden");
       body.classList.add("show-third");
+
+      // TYPEWRITER EFFECT
+      typewriterElement.textContent = "";
+      let i = 0;
+      const interval = setInterval(() => {
+        typewriterElement.textContent += typeText[i];
+        i++;
+        if (i >= typeText.length) clearInterval(interval);
+      }, 70); // speed of typewriting
     };
 
     prevBtn.onclick = () => {
