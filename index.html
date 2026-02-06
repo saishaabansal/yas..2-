@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Valentine</title>
+  <title>Numero 4</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
@@ -16,8 +15,8 @@
 
     :root {
       --baby-pink: #f8c8dc;
-      --third-pink: #fbc2d0;
-      --third-orange: #fcbfa3;
+      --sunset-pink: #fbc2d0;
+      --sunset-orange: #fcbfa3;
       --cherry-red: #b11226;
       --white: #ffffff;
     }
@@ -38,16 +37,14 @@
       position: relative;
     }
 
-    /* FLOATING HEARTS */
+    /* floating hearts */
     .heart {
       position: absolute;
       color: var(--cherry-red);
       opacity: 0.07;
-      font-size: 30px;
-      animation: float 15s linear infinite;
+      font-size: 32px;
+      animation: float 14s linear infinite;
       pointer-events: none;
-      text-shadow: 0 0 10px rgba(177,18,38,0.3);
-      z-index: 1;
     }
 
     @keyframes float {
@@ -55,57 +52,50 @@
       to { transform: translateY(-10vh); }
     }
 
-    /* BUTTONS */
+    /* buttons */
     .btn {
       background: var(--cherry-red);
-      color: var(--white);
-      font-size: 60px;
-      padding: 20px 70px;
+      color: white;
+      font-size: 58px;
+      padding: 18px 70px;
       border: none;
       border-radius: 70px;
       cursor: pointer;
       font-family: 'Pacifico', cursive;
-      animation: pulse 3s ease-in-out infinite;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .btn:hover {
-      transform: scale(1.07);
+      transform: scale(1.06);
       box-shadow: 0 0 15px rgba(177,18,38,0.4);
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.85; }
-      50% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.85; }
-    }
+    .hidden { display: none; }
 
-    .hidden {
-      display: none;
-    }
+    /* page 1 */
+    #startBtn { z-index: 2; }
 
-    /* ENVELOPE */
+    /* envelope page */
     .container {
       text-align: center;
       z-index: 2;
     }
 
     .hint {
-      font-size: 28px;
+      font-size: 26px;
       color: var(--cherry-red);
-      margin-bottom: 18px;
-      animation: pulse 3s ease-in-out infinite;
+      margin-bottom: 16px;
     }
 
     .envelope {
-      width: 520px;
-      height: 350px;
+      width: 560px;
+      height: 380px;
       background: linear-gradient(to bottom, #fff, #f7f2f5);
-      border-radius: 20px;
+      border-radius: 22px;
       position: relative;
       cursor: pointer;
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .envelope::before {
@@ -114,60 +104,47 @@
       inset: 0;
       border: 2px solid rgba(177,18,38,0.25);
       clip-path: polygon(0 100%, 50% 45%, 100% 100%);
-      border-radius: 20px;
+      border-radius: 22px;
     }
 
     .flap {
       position: absolute;
       inset: 0;
-      background: var(--white);
+      background: white;
       clip-path: polygon(0 0, 100% 0, 50% 55%);
       transform-origin: top;
       transition: transform 0.8s ease;
-      border-radius: 20px;
+      border-radius: 22px;
     }
 
-    /* LETTER (SCROLLABLE PINK PAPER) */
     .letter {
       position: absolute;
       bottom: 15px;
       left: 15px;
-      width: 490px;
-      height: 290px;
+      width: 530px;
+      height: 310px;
       background: #ffe6ed;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 22px;
       opacity: 0;
-      transform: translateY(30px) scale(0.95);
+      transform: translateY(30px) scale(0.96);
       transition: all 0.8s ease;
-      color: var(--cherry-red);
-      font-family: 'Comic Sans MS', cursive;
+      font-family: "Comic Sans MS", cursive;
       font-size: 18px;
       line-height: 1.6;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+      color: var(--cherry-red);
       overflow-y: auto;
-      text-align: left;
       white-space: pre-line;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+      text-align: left;
     }
 
-    .letter::-webkit-scrollbar {
-      width: 6px;
-    }
-    .letter::-webkit-scrollbar-thumb {
-      background: rgba(177,18,38,0.25);
-      border-radius: 10px;
-    }
-
-    .open .flap {
-      transform: rotateX(180deg);
-    }
-
+    .open .flap { transform: rotateX(180deg); }
     .open .letter {
       opacity: 1;
       transform: translateY(-10px) scale(1);
     }
 
-    /* ARROW BUTTONS */
     .nav-buttons {
       display: flex;
       gap: 20px;
@@ -175,69 +152,133 @@
     }
 
     .arrow-btn {
-      font-size: 40px;
-      padding: 12px 40px;
+      font-size: 42px;
+      padding: 12px 42px;
     }
 
-    /* THIRD PAGE */
+    /* cards page */
+    .cards-page {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      background: var(--baby-pink);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.2s ease;
+    }
+
+    .show-cards .cards-page {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cards-title {
+      font-size: 64px;
+      color: var(--cherry-red);
+    }
+
+    .cards {
+      display: flex;
+      gap: 30px;
+    }
+
+    .card {
+      width: 260px;
+      height: 230px; /* taller */
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s ease;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      font-family: "Comic Sans MS", cursive;
+      color: var(--cherry-red);
+      background: #ffe6ed;
+    }
+
+    .card-front {
+      font-size: 26px;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    /* final page */
     .third-page {
       position: absolute;
       inset: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       text-align: center;
-      font-size: 60px;
+      font-size: 58px;
       color: var(--cherry-red);
       opacity: 0;
       pointer-events: none;
       transition: opacity 1.5s ease;
-      background: linear-gradient(to bottom, var(--third-pink), var(--third-orange));
-      line-height: 1.4;
+      background: linear-gradient(to bottom, var(--sunset-pink), var(--sunset-orange));
       padding: 40px;
     }
 
     .show-third .third-page {
       opacity: 1;
+      pointer-events: auto;
     }
+#typewriterText {
+  white-space: pre-line;
+}
 
-    /* TYPEWRITER */
-    .typewriter-text {
-      font-size: 60px;
-      line-height: 1.2;
-      overflow-wrap: break-word;
-      max-width: 90vw;
-      text-align: center;
-      white-space: pre-line;
-    }
   </style>
 </head>
 
 <body>
 
-  <!-- FLOATING HEARTS -->
-  <script>
-    for (let i = 0; i < 16; i++) {
-      const h = document.createElement("div");
-      h.className = "heart";
-      h.innerHTML = "♥";
-      h.style.left = Math.random() * 100 + "vw";
-      h.style.animationDuration = 12 + Math.random() * 8 + "s";
-      document.body.appendChild(h);
-    }
-  </script>
+<script>
+  for (let i = 0; i < 16; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "♥";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = 12 + Math.random() * 6 + "s";
+    document.body.appendChild(h);
+  }
+</script>
 
-  <!-- FIRST BUTTON -->
-  <button class="btn" id="startBtn">Numero 4?</button>
+<button class="btn" id="startBtn">Numero 4?</button>
 
-  <!-- ENVELOPE PAGE -->
-  <div class="container hidden" id="envelopePage">
-    <div class="hint">click to open</div>
+<div class="container hidden" id="envelopePage">
+  <div class="hint">click to open</div>
 
-    <div class="envelope" id="envelope">
-      <div class="flap"></div>
-      <div class="letter">
+  <div class="envelope" id="envelope">
+    <div class="flap"></div>
+    <div class="letter">
 okayyy so hiiiii my loveeee😭😭
 
 i dont think you were expecting me to code something for you and ur on a website (pretty basic and layerless) BUT A WEBSITE dedicated to you😭
@@ -253,72 +294,114 @@ i love every single thing about youuuu💗 like even when im sad js like yk thin
 im always here for you and i will be there by ur side whether ur having a good or a bad day and i will support you through wtv decision u decide to make no judgement
 
 oh and even tho we always say this, UR ALL MINE AND IM NOT SHARING. i will also continue to abuse you for the rest of ur life and u cant do shit abt it cuz u love me too much🥰
+    </div>
+  </div>
 
+  <div class="nav-buttons">
+    <button class="btn arrow-btn" id="nextBtn">→</button>
+  </div>
+</div>
+
+<!-- cards page -->
+<div class="cards-page" id="cardsPage">
+  <div class="cards-title">us💗</div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-face card-front">
+          fav memories
+        </div>
+        <div class="card-face card-back">
+          -the ilym debate(I WIN STFU)<br>
+          -stupid nicknames<br>
+          -laughing at nothing<br>
+          -field trippp(hm bus)
+        </div>
       </div>
     </div>
 
-    <div class="nav-buttons">
-      <button class="btn arrow-btn" id="prevBtn">←</button>
-      <button class="btn arrow-btn" id="nextBtn">→</button>
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-face card-front">
+          why you
+        </div>
+        <div class="card-face card-back">
+          -ur kindness<br>
+          -the way u listen to me<br>
+          -how safe u make me feel<br>
+          -u so foine too<br>
+	  -the way u put up w my 20,000 personalities
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-face card-front">
+          us, always
+        </div>
+        <div class="card-face card-back">
+          -more nonsense<br>
+          -more inside jokes<br>
+          -more bullshit-assly questionable convos<br>
+          -more love, forever
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- THIRD PAGE -->
-  <div class="third-page" id="thirdPage">
-    <div class="typewriter-text" id="typewriter"></div>
-  </div>
+  <button class="btn arrow-btn" id="cardsNext">→</button>
+</div>
 
-  <!-- AUDIO -->
-  <audio id="clickSound" src="click.mp3"></audio>
-  <audio id="rustleSound" src="rustle.wav"></audio>
+<!-- final page -->
+<div class="third-page" id="thirdPage">
+  <div id="typewriterText"></div>
+</div>
 
-  <script>
-    const startBtn = document.getElementById("startBtn");
-    const envelopePage = document.getElementById("envelopePage");
-    const envelope = document.getElementById("envelope");
-    const nextBtn = document.getElementById("nextBtn");
-    const prevBtn = document.getElementById("prevBtn");
-    const body = document.body;
-    const clickSound = document.getElementById("clickSound");
-    const rustleSound = document.getElementById("rustleSound");
+<script>
+  const startBtn = document.getElementById("startBtn");
+  const envelopePage = document.getElementById("envelopePage");
+  const envelope = document.getElementById("envelope");
+  const body = document.body;
 
-    const typewriterElement = document.getElementById("typewriter");
-    const typeText = "ill always love you more btw\nhappy 4 month + valentines baby";
+  startBtn.onclick = () => {
+    startBtn.classList.add("hidden");
+    envelopePage.classList.remove("hidden");
+  };
 
-    startBtn.onclick = () => {
-      clickSound.play();
-      startBtn.classList.add("hidden");
-      envelopePage.classList.remove("hidden");
-    };
+  envelope.onclick = () => {
+    envelope.classList.toggle("open");
+  };
 
-    envelope.onclick = () => {
-      envelope.classList.toggle("open");
-      rustleSound.play();
-    };
+  document.getElementById("nextBtn").onclick = () => {
+    envelopePage.classList.add("hidden");
+    body.classList.add("show-cards");
+  };
 
-    nextBtn.onclick = () => {
-      clickSound.play();
-      envelopePage.classList.add("hidden");
-      body.classList.add("show-third");
+  document.querySelectorAll(".card").forEach(card => {
+    card.onclick = () => card.classList.toggle("flipped");
+  });
 
-      // TYPEWRITER EFFECT
-      typewriterElement.textContent = "";
-      let i = 0;
-      const interval = setInterval(() => {
-        typewriterElement.textContent += typeText[i];
-        i++;
-        if (i >= typeText.length) clearInterval(interval);
-      }, 70); // speed of typewriting
-    };
+  const typewriterText = document.getElementById("typewriterText");
+const finalMessage = "ill always love you more btw\nhappy 4 month + valentines baby";
 
-    prevBtn.onclick = () => {
-      clickSound.play();
-      envelopePage.classList.add("hidden");
-      startBtn.classList.remove("hidden");
-    };
-  </script>
+document.getElementById("cardsNext").onclick = () => {
+  body.classList.remove("show-cards");
+  body.classList.add("show-third");
+
+  // typewriter effect
+  typewriterText.textContent = "";
+  let i = 0;
+
+  const interval = setInterval(() => {
+    typewriterText.textContent += finalMessage[i];
+    i++;
+    if (i >= finalMessage.length) clearInterval(interval);
+  }, 70);
+};
+
+</script>
 
 </body>
 </html>
-
-
